@@ -1,0 +1,7 @@
+node_modules
+# MySQL Docker volume files
+*.err
+*.pid
+*.log
+# END: abpxx6d04wxr
+
