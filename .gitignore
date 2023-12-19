@@ -4,5 +4,4 @@ node_modules
 *.pid
 *.log
 # END: abpxx6d04wxr
-mysql
 /mysql

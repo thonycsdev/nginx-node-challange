@@ -12,7 +12,13 @@ services:
     tty: true
     command: bash
     depends_on:
-      - db
+      db:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "node", "index.js"]
+      interval: 5s
+      timeout: 10s
+      retries: 3
 
   db:
     container_name: mysql_database
@@ -28,6 +34,11 @@ services:
     networks:
       - node_net
     command: --innodb_use_native_aio=
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-uroot", "-plocal_password"]
+      interval: 5s
+      timeout: 10s
+      retries: 3
 
   nginx:
     build:
@@ -37,7 +48,8 @@ services:
     ports:
       - "8080:80"
     depends_on:
-      - node
+      node:
+        condition: service_healthy
     networks:
       - node_net
 
