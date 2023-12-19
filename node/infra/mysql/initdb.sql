@@ -1,0 +1,5 @@
+CREATE DATABASE IF NOT EXISTS local_database;
+CREATE TABLE IF NOT EXISTS `local_database`.`People` (
+  `id` INT AUTO_INCREMENT PRIMARY KEY,
+  `name` VARCHAR(255) NOT NULL  
+);

@@ -10,12 +10,11 @@ services:
     networks:
       - node_net
     tty: true
-    command: bash
     depends_on:
       db:
         condition: service_healthy
     healthcheck:
-      test: ["CMD", "node", "index.js"]
+      test: ["CMD", "curl", "-f", "http://localhost:3000/health"]
       interval: 5s
       timeout: 10s
       retries: 3
@@ -29,6 +28,7 @@ services:
     restart: always
     volumes:
       - ./mysql/:/var/lib/mysql
+      - ./node/infra/mysql:/docker-entrypoint-initdb.d
     ports:
       - 3306:3306
     networks:

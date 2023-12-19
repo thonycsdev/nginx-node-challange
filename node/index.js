@@ -10,8 +10,11 @@ const connection = mysql.createPool({
   database: "local_database",
 });
 
+app.get('/health', (req, res) => {
+  res.sendStatus(200);
+});
 app.get("/", (req, res) => {
-  var sql = "INSERT INTO People(people_name) VALUES('Anthony o Coutnho')";
+  var sql = "INSERT INTO People(name) VALUES('Anthony o Coutnho')";
 
   connection.query(sql, function (err, result) {
     if (err) throw err;
